@@ -7,11 +7,11 @@ RUN curl -s https://get.docker.io/ubuntu/ | sh
 RUN useradd -m -s /usr/bin/zsh speg03
 
 ENV HOME /home/speg03
-WORKDIR $HOME
+WORKDIR /home/speg03
 
 RUN mkdir -p .ssh
-ADD id_rsa_docker /home/docker/.ssh/id_rsa_docker
-ADD id_rsa_docker.pub /home/docker/.ssh/authorized_keys
+ADD id_rsa_docker /home/speg03/.ssh/id_rsa_docker
+ADD id_rsa_docker.pub /home/speg03/.ssh/authorized_keys
 RUN chown -R speg03:speg03 . && chmod 0700 .ssh && chmod 0600 .ssh/*
 
 RUN echo "speg03  ALL=(ALL) NOPASSWD:ALL" >>/etc/sudoers.d/speg03
