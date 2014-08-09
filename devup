@@ -1,0 +1,28 @@
+#!/bin/sh
+
+HOSTNAME=dev
+SSH_PORT=3222
+
+if [ ! -e $HOME/.ssh/id_rsa_dev ]; then
+    ssh-keygen -N '' -C '' -f $HOME/.ssh/id_rsa_dev >/dev/null
+    cat $HOME/.ssh/id_rsa_dev.pub >>$HOME/.ssh/authorized_keys
+fi
+
+grep "^Host $HOSTNAME$" $HOME/.ssh/config >/dev/null 2>&1 || cat <<EOF >>$HOME/.ssh/config
+Host $HOSTNAME
+  HostName localhost
+  Port $SSH_PORT
+  PasswordAuthentication no
+  IdentityFile $HOME/.ssh/id_rsa_dev
+  IdentitiesOnly yes
+  LogLevel FATAL
+  UserKnownHostsFile /dev/null
+  StrictHostKeyChecking no
+EOF
+
+docker run -d \
+    -e UID=$(id -u) \
+    -e GID=$(id -g) \
+    -e USER=$(whoami) \
+    -h $HOSTNAME -p $SSH_PORT:22 -v $HOME:$HOME \
+    speg03/dev
