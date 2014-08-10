@@ -9,5 +9,5 @@ RUN service ssh start
 VOLUME ["/home"]
 EXPOSE 22
 
-ADD run.sh run.sh
-CMD ["sh", "run.sh"]
+ADD run.sh /root/run.sh
+CMD ["sh", "/root/run.sh"]
