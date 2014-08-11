@@ -1,13 +1,17 @@
 FROM ubuntu:14.04
 MAINTAINER Takahiro Yano <speg03@gmail.com>
 
-RUN apt-get update -y && apt-get install -y curl man emacs git tmux zsh openssh-server
-RUN curl -s https://get.docker.io/ubuntu/ | sh
+ENV DEBIAN_FRONTEND noninteractive
+
+ADD . /build
+
+RUN apt-get update -y
+RUN cat /build/packages.list | xargs apt-get install -y --no-install-recommends
+RUN curl -sSL https://get.docker.io/ubuntu/ | sh
 
 RUN service ssh start
 
 VOLUME ["/home"]
 EXPOSE 22
 
-ADD run.sh /root/run.sh
-CMD ["sh", "/root/run.sh"]
+CMD ["sh", "/build/run.sh"]
