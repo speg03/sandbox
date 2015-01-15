@@ -2,7 +2,10 @@ ca-certificates
 curl
 emacs
 git
+golang
 man
+nodejs
 openssh-server
+sqlite3
 tmux
 zsh

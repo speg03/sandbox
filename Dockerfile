@@ -4,7 +4,7 @@ MAINTAINER Takahiro Yano <speg03@gmail.com>
 ENV DOCKER_VERSION 1.3.3
 ENV DEBIAN_FRONTEND noninteractive
 
-ADD . /build
+ADD ./packages.list /build/
 
 RUN apt-get update
 RUN cat /build/packages.list | xargs apt-get install -y --no-install-recommends
@@ -17,4 +17,5 @@ RUN service ssh start
 VOLUME ["/home"]
 EXPOSE 22
 
+ADD . /build
 CMD ["sh", "/build/run.sh"]
