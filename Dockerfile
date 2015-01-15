@@ -13,6 +13,7 @@ RUN curl -L https://get.docker.io/builds/Linux/x86_64/docker-${DOCKER_VERSION} -
     chmod +x /usr/local/bin/docker
 
 RUN service ssh start
+RUN update-locale LANG=ja_JP.UTF-8
 
 VOLUME ["/home"]
 EXPOSE 22
