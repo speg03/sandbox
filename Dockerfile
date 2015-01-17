@@ -15,7 +15,7 @@ RUN curl -L https://get.docker.io/builds/Linux/x86_64/docker-${DOCKER_VERSION} -
     chmod +x /usr/local/bin/docker
 
 # Heroku
-RUN sh <(curl -s https://toolbelt.heroku.com/install-ubuntu.sh)
+RUN wget -qO- https://toolbelt.heroku.com/install-ubuntu.sh | sh
 
 RUN service ssh start
 RUN update-locale LANG=ja_JP.UTF-8
