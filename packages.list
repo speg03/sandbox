@@ -18,6 +18,7 @@ man
 nodejs
 openssh-server
 sqlite3
+tig
 tmux
 zlib1g-dev
 zsh
