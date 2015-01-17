@@ -11,12 +11,17 @@ libcurses5-dev
 libffi-dev
 libgdbm3
 libgdbm-dev
+libmysqlclient-dev
+libpq-dev
 libreadline6-dev
+libsqlite3-dev
 libssl-dev
 libyaml-dev
 man
+mysql-client
 nodejs
 openssh-server
+postgresql-client
 sqlite3
 tig
 tmux
