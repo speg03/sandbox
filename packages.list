@@ -25,6 +25,7 @@ postgresql-client
 sqlite3
 tig
 tmux
+unzip
 wget
 zlib1g-dev
 zsh
