@@ -21,7 +21,7 @@ Host $HOSTNAME
 EOF
 
 docker run -d \
-    --name dev \
+    --name $HOSTNAME \
     -e UID=$(id -u) \
     -e GID=$(id -g) \
     -e USER=$(whoami) \
