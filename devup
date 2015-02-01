@@ -26,5 +26,5 @@ docker run -d \
     -e UID=$(id -u) \
     -e GID=$(id -g) \
     -e USER=$(whoami) \
-    -h $HOSTNAME -p $SSH_PORT:22 -v $HOME:$HOME \
+    -h $HOSTNAME -p $SSH_PORT:22 -v $HOME:/home/$(whoami) \
     speg03/dev
