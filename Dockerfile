@@ -23,5 +23,5 @@ RUN update-locale LANG=ja_JP.UTF-8
 VOLUME ["/home"]
 EXPOSE 22
 
-ADD . /build
-CMD ["sh", "/build/run.sh"]
+ADD ./run.sh /build/
+ENTRYPOINT ["/build/run.sh"]
