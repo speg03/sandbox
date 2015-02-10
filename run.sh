@@ -1,7 +1,9 @@
 #!/bin/sh
 
-groupadd -g $GID $USER
 groupadd -g $DOCKER_GID docker
+useradd -M -s $(which nologin) -u $DOCKER_UID -g $DOCKER_GID docker
+
+groupadd -g $GID $USER
 useradd -s /usr/bin/zsh -u $UID -g $GID -G $DOCKER_GID $USER
 echo "$USER  ALL=(ALL) NOPASSWD:ALL" >>/etc/sudoers.d/$USER
 
