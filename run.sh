@@ -6,9 +6,13 @@ echo "$USER  ALL=(ALL) NOPASSWD:ALL" >>/etc/sudoers.d/$USER
 
 ### Configuration for Docker
 if [ -e /var/run/docker.sock ]; then
-    docker_gid=$(stat -c %g /var/run/docker.sock)
-    groupadd -g $docker_gid docker
-    gpasswd -a $USER docker
+    docker_group_name=$(stat -c %G /var/run/docker.sock)
+    if [ "$docker_group_name" = "UNKNOWN" ]; then
+        docker_group_id=$(stat -c %g /var/run/docker.sock)
+        docker_group_name=docker
+        groupadd -g $docker_group_id $docker_group_name
+    fi
+    gpasswd -a $USER $docker_group_name
 fi
 
 ### Run sandbox
