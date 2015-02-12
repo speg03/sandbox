@@ -12,7 +12,6 @@ RUN rm -rf /var/lib/apt/lists/*
 RUN service ssh start
 RUN update-locale LANG=ja_JP.UTF-8
 
-VOLUME ["/home"]
 EXPOSE 22
 
 ADD ./run.sh /build/
