@@ -1,12 +1,27 @@
-emacs
-git
-golang
-iproute
+# General
 man-pages
 openssh-server
 sudo
-tig
-tmux
 unzip
 wget
+
+# for commands (ip, ss)
+iproute
+
+# Development Tools
+emacs
+git
+golang
+tig
+tmux
 zsh
+
+# ruby-build
+gcc
+openssl-devel
+libyaml-devel
+libffi-devel
+readline-devel
+zlib-devel
+gdbm-devel
+ncurses-devel
