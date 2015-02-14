@@ -1,16 +1,11 @@
-FROM ubuntu:14.04
+FROM fedora:21
 MAINTAINER Takahiro Yano <speg03@gmail.com>
 
-ENV DEBIAN_FRONTEND noninteractive
-
 # Install Packages
+RUN yum update -y
 ADD ./packages.list /build/
-RUN apt-get update
-RUN cat /build/packages.list | xargs apt-get install -y --no-install-recommends
-RUN rm -rf /var/lib/apt/lists/*
-
-RUN service ssh start
-RUN update-locale LANG=ja_JP.UTF-8
+RUN cat /build/packages.list | xargs yum install -y
+RUN yum clean all
 
 EXPOSE 22
 
