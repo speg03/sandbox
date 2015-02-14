@@ -1,11 +1,16 @@
 # General
+autoconf
+bzip2
+gcc
+make
 man-pages
 openssh-server
 sudo
+tar
 unzip
 wget
 
-# for commands (ip, ss)
+# Commands (ip, ss)
 iproute
 
 # Development Tools
@@ -17,7 +22,6 @@ tmux
 zsh
 
 # ruby-build
-gcc
 openssl-devel
 libyaml-devel
 libffi-devel
