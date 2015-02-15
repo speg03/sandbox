@@ -6,7 +6,7 @@
 : ${SANDBOX_HOME:=/home/sandbox}
 
 groupadd -g $SANDBOX_GID $SANDBOX_USER
-useradd -d $SANDBOX_HOME -s $(which zsh) -u $SANDBOX_UID -g $SANDBOX_GID $SANDBOX_USER
+useradd -M -d $SANDBOX_HOME -s $(which zsh) -u $SANDBOX_UID -g $SANDBOX_GID $SANDBOX_USER
 echo "$SANDBOX_USER  ALL=(ALL) NOPASSWD:ALL" >>/etc/sudoers.d/$SANDBOX_USER
 
 ### Configuration for Docker
