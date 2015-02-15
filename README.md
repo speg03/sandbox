@@ -1,13 +1,17 @@
 sandbox
 =======
 
+Requirements
+------------
+
+* Docker
+
 Installation
 ------------
 
 ```
-$ mkdir -p ~/bin
-$ curl https://speg03.github.io/sandbox/sandbox -o ~/bin/sandbox
-$ chmod +x ~/bin/sandbox
+$ curl -O https://speg03.github.io/sandbox/sandbox
+$ chmod +x ./sandbox
 ```
 
 Usage
@@ -24,4 +28,13 @@ Commands:
 Options:
     -p     Publish a port (see "docker help run")
     -h     Print this help
+```
+
+Customize
+---------
+
+Change home directory of sandbox container (default `$HOME`)
+
+```
+$ SANDBOX_HOME=$HOME/sandbox sandbox start
 ```
