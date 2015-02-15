@@ -29,3 +29,7 @@ readline-devel
 zlib-devel
 gdbm-devel
 ncurses-devel
+
+# Ruby on Rails
+nodejs
+sqlite-devel
