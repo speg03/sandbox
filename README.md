@@ -38,3 +38,21 @@ Change home directory of sandbox container (default `$HOME`)
 ```
 $ SANDBOX_HOME=$HOME/sandbox sandbox start
 ```
+
+Tips
+----
+
+SSH configuration example (default `$HOME/.ssh/config`)
+
+```
+Host sandbox
+  HostName 127.0.0.1
+  User vagrant
+  Port 3222
+  UserKnownHostsFile /dev/null
+  StrictHostKeyChecking no
+  PasswordAuthentication no
+  IdentityFile ~/sandbox/.ssh/id_rsa_sandbox
+  IdentitiesOnly yes
+  LogLevel FATAL
+```
