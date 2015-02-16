@@ -22,7 +22,7 @@ fi
 
 ### Run sandbox
 if [ $# = 0 ]; then
-    /usr/sbin/sshd -D
+    /usr/sbin/sshd -De
 else
     runuser - $SANDBOX_USER -c "$*"
 fi
