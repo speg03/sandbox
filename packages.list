@@ -15,7 +15,7 @@ wget
 iproute
 
 # Development Tools
-emacs
+emacs-nox
 git
 golang
 tig
