@@ -3,6 +3,7 @@ autoconf
 bzip2
 gcc
 make
+man
 man-pages
 openssh-server
 sudo
