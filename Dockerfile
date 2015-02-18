@@ -1,6 +1,9 @@
 FROM fedora:21
 MAINTAINER Takahiro Yano <speg03@gmail.com>
 
+# Enable to install package documents
+RUN sed -ri 's/^(tsflags=nodocs)$/#\1/g' /etc/yum.conf
+
 # Install Packages
 RUN yum update -y && yum clean all
 ADD ./packages.list /build/
