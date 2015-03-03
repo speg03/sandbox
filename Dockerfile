@@ -10,6 +10,9 @@ ADD ./packages.list /build/
 RUN cat /build/packages.list | grep -v '^#' | grep -v '^$' \
     | xargs yum install -y && yum clean all
 
+# Set timezone to Asia/Tokyo
+RUN ln -sf /usr/share/zoneinfo/Asia/Tokyo /etc/localtime
+
 # Configure SSH server
 RUN ssh-keygen -t rsa -f /etc/ssh/ssh_host_rsa_key -N '' \
     && ssh-keygen -t ecdsa -f /etc/ssh/ssh_host_ecdsa_key -N '' \
