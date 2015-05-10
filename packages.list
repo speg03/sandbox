@@ -1,8 +1,6 @@
-# General
-autoconf
-bzip2
-gcc
-make
+curl
+git
+iproute
 man
 man-pages
 openssh-server
@@ -10,27 +8,3 @@ sudo
 tar
 unzip
 wget
-
-# Commands (ip, ss)
-iproute
-
-# Development Tools
-emacs-nox
-git
-golang
-tig
-tmux
-zsh
-
-# ruby-build
-openssl-devel
-libyaml-devel
-libffi-devel
-readline-devel
-zlib-devel
-gdbm-devel
-ncurses-devel
-
-# Ruby on Rails
-nodejs
-sqlite-devel
