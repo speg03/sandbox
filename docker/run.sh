@@ -1,8 +1,11 @@
 #!/bin/sh
 
 : ${SANDBOX_USER:=sandbox}
+: ${SANDBOX_UID:=1000}
+: ${SANDBOX_GID:=1000}
 
-useradd $SANDBOX_USER
+groupadd -g $SANDBOX_GID $SANDBOX_USER
+useradd -u $SANDBOX_UID -g $SANDBOX_GID $SANDBOX_USER
 echo "$SANDBOX_USER  ALL=(ALL) NOPASSWD:ALL" >>/etc/sudoers.d/$SANDBOX_USER
 
 if [ $# = 0 ]; then
