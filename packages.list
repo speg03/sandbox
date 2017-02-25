@@ -1,10 +1,6 @@
-curl
 git
 iproute
 man
 man-pages
 openssh-server
 sudo
-tar
-unzip
-wget
