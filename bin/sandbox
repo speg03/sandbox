@@ -10,8 +10,6 @@
 : ${SANDBOX_UID:=$(id -u)}
 : ${SANDBOX_GID:=$(id -g)}
 
-: ${SANDBOX_DOCKER_SOCK:=/var/run/docker.sock}
-
 usage() {
     cat <<EOF
 Usage: sandbox [command] [options] [command-in-container]
@@ -58,7 +56,6 @@ docker_options=$(cat <<EOF
   -e SANDBOX_USER=$SANDBOX_USER \
   -e SANDBOX_HOME=$SANDBOX_HOME \
   -v $SANDBOX_HOME:$SANDBOX_HOME \
-  -v $SANDBOX_DOCKER_SOCK:$SANDBOX_DOCKER_SOCK \
   $SANDBOX_IMAGE
 EOF
 )
