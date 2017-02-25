@@ -6,7 +6,7 @@ useradd $SANDBOX_USER
 echo "$SANDBOX_USER  ALL=(ALL) NOPASSWD:ALL" >>/etc/sudoers.d/$SANDBOX_USER
 
 if [ $# = 0 ]; then
-    key="/home/$SANDBOX_USER/.ssh/id_rsa_sandbox"
+    key="/home/$SANDBOX_USER/.ssh/sandbox.pem"
     if [ ! -f $key ]; then
         runuser - $SANDBOX_USER -c "ssh-keygen -f $key -N '' -q"
         runuser - $SANDBOX_USER -c "cat $key.pub >>$(dirname $key)/authorized_keys"
