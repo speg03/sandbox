@@ -1,0 +1,97 @@
+#!/bin/sh
+
+: ${SANDBOX_IMAGE:=speg03/sandbox}
+
+: ${SANDBOX_NAME:=sandbox}
+: ${SANDBOX_SSH_PORT:=3222}
+
+: ${SANDBOX_HOME:=$HOME}
+: ${SANDBOX_USER:=$(whoami)}
+: ${SANDBOX_UID:=$(id -u)}
+: ${SANDBOX_GID:=$(id -g)}
+
+: ${SANDBOX_DOCKER_SOCK:=/var/run/docker.sock}
+
+usage() {
+    cat <<EOF
+Usage: sandbox [command] [options] [command-in-container]
+
+Commands:
+    start  Start sandbox docker container
+    run    Run a command in sandbox
+
+Options:
+    -p     Publish a port (see "docker help run")
+    -h     Print this help
+EOF
+    exit 1
+}
+
+main() {
+    [ $# -eq 0 ] && usage
+    command=$1
+    shift
+
+    while getopts p:h OPTION; do
+        case $OPTION in
+            p)  publish_options="$publish_options -p $OPTARG" ;;
+            h)  usage ;;
+            \?) usage ;;
+        esac
+    done
+
+    shift $((OPTIND - 1))
+
+    case "$command" in
+        "start") start_sandbox ;;
+        "run")   run_sandbox "$@" ;;
+        *)       usage ;;
+    esac
+}
+
+### SSH Configuration
+
+create_auth_key() {
+    ssh_id_path=$SANDBOX_HOME/.ssh/id_rsa_$SANDBOX_NAME
+    ssh_path=$(dirname $ssh_id_path)
+
+    if [ ! -e $ssh_id_path ]; then
+        mkdir -m 0700 -p $ssh_path
+        ssh-keygen -N '' -C $SANDBOX_NAME -f $ssh_id_path >/dev/null
+        cat $ssh_id_path.pub >>$ssh_path/authorized_keys
+        chmod 0600 $ssh_path/authorized_keys
+    fi
+}
+
+### Docker Configuration
+
+docker_options=$(cat <<EOF
+  -h $SANDBOX_NAME \
+  -e SANDBOX_UID=$SANDBOX_UID \
+  -e SANDBOX_GID=$SANDBOX_GID \
+  -e SANDBOX_USER=$SANDBOX_USER \
+  -e SANDBOX_HOME=$SANDBOX_HOME \
+  -v $SANDBOX_HOME:$SANDBOX_HOME \
+  -v $SANDBOX_DOCKER_SOCK:$SANDBOX_DOCKER_SOCK \
+  $SANDBOX_IMAGE
+EOF
+)
+
+start_sandbox() {
+    create_auth_key
+
+    publish_options="$publish_options -p $SANDBOX_SSH_PORT:22"
+
+    docker start $SANDBOX_NAME 2>/dev/null
+    if [ $? -ne 0 ]; then
+        docker run --detach --name $SANDBOX_NAME \
+            $publish_options $docker_options
+    fi
+}
+
+run_sandbox() {
+    docker run --interactive --tty --rm \
+        $publish_options $docker_options "cd $(pwd) && $*"
+}
+
+main "$@"
