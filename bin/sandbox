@@ -49,20 +49,6 @@ main() {
     esac
 }
 
-### SSH Configuration
-
-create_auth_key() {
-    ssh_id_path=$SANDBOX_HOME/.ssh/id_rsa_$SANDBOX_NAME
-    ssh_path=$(dirname $ssh_id_path)
-
-    if [ ! -e $ssh_id_path ]; then
-        mkdir -m 0700 -p $ssh_path
-        ssh-keygen -N '' -C $SANDBOX_NAME -f $ssh_id_path >/dev/null
-        cat $ssh_id_path.pub >>$ssh_path/authorized_keys
-        chmod 0600 $ssh_path/authorized_keys
-    fi
-}
-
 ### Docker Configuration
 
 docker_options=$(cat <<EOF
@@ -78,8 +64,6 @@ EOF
 )
 
 start_sandbox() {
-    create_auth_key
-
     publish_options="$publish_options -p $SANDBOX_SSH_PORT:22"
 
     docker start $SANDBOX_NAME 2>/dev/null
