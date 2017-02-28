@@ -65,6 +65,7 @@ start_sandbox() {
     docker start $SANDBOX_NAME 2>/dev/null
     if [ $? -ne 0 ]; then
         docker run --detach --name $SANDBOX_NAME \
+            --security-opt seccomp=unconfined \
             $publish_options $docker_options
     fi
 }
