@@ -5,7 +5,7 @@
 : ${SANDBOX_NAME:=sandbox}
 : ${SANDBOX_SSH_PORT:=3222}
 
-: ${SANDBOX_HOME:=$HOME}
+: ${SANDBOX_HOME:=$HOME/.sandbox}
 : ${SANDBOX_USER:=$(whoami)}
 : ${SANDBOX_UID:=$(id -u)}
 : ${SANDBOX_GID:=$(id -g)}
