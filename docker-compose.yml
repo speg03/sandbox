@@ -1,0 +1,16 @@
+version: "3.7"
+
+services:
+  workspace:
+    build: ./workspace/build
+    hostname: workspace
+    ports:
+      - "127.0.0.1:10022:22"
+    volumes:
+      - workspace:/home
+      - ./workspace:/mnt/workspace
+      - /var/run/docker.sock:/var/run/docker.sock
+    restart: always
+
+volumes:
+  workspace:
