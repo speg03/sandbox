@@ -12,5 +12,15 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
     restart: always
 
+  proxy:
+    build: ./proxy/build
+    init: true
+    hostname: proxy
+    ports:
+      - "127.0.0.1:3128:3128"
+    volumes:
+      - ./proxy/squid/squid.conf:/etc/squid/squid.conf
+    restart: always
+
 volumes:
   workspace:
