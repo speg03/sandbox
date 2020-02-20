@@ -1,1 +1,2 @@
-proxy/squid/squid.conf.local
+proxy/squid/conf.local.d/*
+!proxy/squid/conf.local.d/notes.conf
