@@ -1,13 +1,14 @@
-FROM fedora:31
+FROM archlinux:latest
 
 RUN ln -sf /usr/share/zoneinfo/Asia/Tokyo /etc/localtime
 
-RUN sed -zi 's/tsflags=nodocs\n//' /etc/dnf/dnf.conf
-RUN dnf install -y openssh-server && dnf clean all
+RUN sed -zi 's@NoExtract  = usr/share/man/\* usr/share/info/\*\n@@' /etc/pacman.conf
+RUN pacman -Syu --noconfirm \
+        openssh \
+    && rm -f /var/cache/pacman/pkg/*
 
-RUN ssh-keygen -t rsa -f /etc/ssh/ssh_host_rsa_key -N '' -q \
-    && ssh-keygen -t ecdsa -f /etc/ssh/ssh_host_ecdsa_key -N '' -q \
-    && ssh-keygen -t ed25519 -f /etc/ssh/ssh_host_ed25519_key -N '' -q
+COPY ./run.sh /root/run.sh
+RUN chmod +x /root/run.sh
 
 EXPOSE 22
-CMD ["/usr/sbin/sshd", "-De"]
+CMD ["/root/run.sh"]

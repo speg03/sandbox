@@ -1,8 +1,10 @@
-FROM fedora:rawhide
+FROM archlinux:latest
 
 RUN ln -sf /usr/share/zoneinfo/Asia/Tokyo /etc/localtime
 
-RUN dnf install -y squid && dnf clean all
+RUN pacman -Syu --noconfirm \
+        squid \
+    && rm -f /var/cache/pacman/pkg/*
 
 COPY ./run.sh /root/run.sh
 RUN chmod +x /root/run.sh
