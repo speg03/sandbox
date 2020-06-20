@@ -1,10 +1,7 @@
-FROM archlinux:latest
+FROM alpine:latest
 
+RUN apk add --update --no-cache squid tzdata
 RUN ln -sf /usr/share/zoneinfo/Asia/Tokyo /etc/localtime
-
-RUN pacman -Syu --noconfirm \
-        squid \
-    && rm -f /var/cache/pacman/pkg/*
 
 COPY ./run.sh /root/run.sh
 RUN chmod +x /root/run.sh
