@@ -5,7 +5,7 @@ RUN ln -sf /usr/share/zoneinfo/Asia/Tokyo /etc/localtime
 RUN sed -zi 's@NoExtract  = usr/share/man/\* usr/share/info/\*\n@@' /etc/pacman.conf
 RUN pacman -Syu --noconfirm \
         openssh \
-        sudo vi \
+        sudo \
         man-db man-pages \
     && rm -f /var/cache/pacman/pkg/*
 
